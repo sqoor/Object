@@ -7,6 +7,19 @@ Create an object represents you
 have your first name, last name, age, dob(date of birth), favorite food (3),favorite movie (5)
 */
 
+var abdala = {
+  firstName : 'Abdullah',
+  lastName: 'Alsqoor',
+  age: 25,
+  dob: 1993,
+  favoriteFood: ['Mansaf', 'Kabsa', 'Mandi'],
+  favoriteMovie: ['Start Trick', 'Training Day', 'American Ganstar', 'Slumdog Millionaire']
+};
+
+
+
+
+
 
 
 
@@ -22,13 +35,39 @@ var persons = [
 
 /*
 2
-Using the varabile persons
+Using the variable persons
 Create a function called firstName
 that accept an object
 and return all the first name of the person insides
 
 Ex: firstName(persons) => ['John', 'Alex', 'Alice', 'Thor', 'Soso']
 */
+
+
+
+function firstName (arr) {
+  var firstNamesArray = [];
+  var personObj;
+  var nameObj;
+
+  for(var i = 0; i < arr.length; i++) {
+    personObj = arr[i];
+
+    for(var outerKey in personObj) {
+      if(outerKey === 'name') {
+        nameObj = personObj[outerKey];
+        for(var innerKey in nameObj) {
+          if(innerKey === 'first') {
+            firstNamesArray.push(nameObj[innerKey]);
+          }
+        }
+      }
+    }
+  }
+
+  return firstNamesArray;
+}
+
 
 
 /*
@@ -40,6 +79,27 @@ and return the average age of those persons
 
 Ex: averageAge(persons) => 41.2
 */
+
+function  averageAge(arr) {
+  var personObj;
+  var sum = 0;
+  var averageAges;
+
+  for(var i = 0; i < arr.length; i++) {
+    personObj = arr[i];
+
+    for(var key in personObj) {
+      if(key === 'age') {
+        sum += personObj[key];
+      }
+    }
+  }
+
+  averageAges = sum / arr.length
+  return averageAges;
+}
+
+
 
 
 /*
@@ -53,6 +113,32 @@ Ex: olderPerson(persons) => "Soso Al-Amora"
 */
 
 
+function olderPerson(arr) {
+  var personObj;
+  var maxAge = 0;
+  var OlderPersonName;
+
+  for(var i = 0; i < arr.length; i++) {
+    personObj = arr[i];
+
+    for(var key in personObj) {
+      if(key === 'age') {
+        if(maxAge < personObj[key]) {
+           maxAge =  personObj[key];
+           OlderPersonName = personObj['name']['first'] + ' ' + personObj['name']['last'];
+        }
+      }
+    }
+  }
+
+  return OlderPersonName;
+}
+
+
+
+
+
+
 /*
 5
 Using the varabile persons
@@ -64,6 +150,36 @@ Ex: longestName(persons) => "Soso Al-Amora"
 */
 
 
+function longestName(arr) {
+  var personObj;
+  var nameObj;
+  var longestFullName = '';
+  var tempName;
+
+  for(var i = 0; i < arr.length; i++) {
+    personObj = arr[i];
+
+    for(var outerKey in personObj) {
+      if(outerKey === 'name') {
+        nameObj = personObj[outerKey];
+        for(var innerKey in nameObj) {
+          tempName = nameObj['first'] + ' ' + nameObj['last'];
+          
+          if(longestFullName.length < tempName.length)
+            longestFullName = tempName;
+        }
+      }
+    }
+  }
+
+  return longestFullName;
+}
+
+
+
+
+
+
 /*
 6
 Using the varabile persons
@@ -73,6 +189,36 @@ and return the full name of the person have longest full name
 
 Ex: longestName(persons) => "Soso Al-Amora"
 */
+
+
+function longestName(arr) {
+  var personObj;
+  var nameObj;
+  var longestFullName = '';
+  var tempName;
+
+  for(var i = 0; i < arr.length; i++) {
+    personObj = arr[i];
+
+    for(var outerKey in personObj) {
+      if(outerKey === 'name') {
+        nameObj = personObj[outerKey];
+        for(var innerKey in nameObj) {
+          tempName = nameObj['first'] + ' ' + nameObj['last'];
+          
+          if(longestFullName.length < tempName.length)
+            longestFullName = tempName;
+        }
+      }
+    }
+  }
+
+  return longestFullName;
+}
+
+
+
+
 
 //////////////////////////////////////////////////////////////////
 
@@ -100,6 +246,25 @@ Ex: repeatWord("My name is alex mercer class name B baba mama hello Hello HELLO"
 */
 
 
+function repeatWord(str) {
+  var strArray = str.split(' ');
+  var repeatedWords = {};
+  var element;
+
+  for(var i = 0; i < strArray.length; i++) {
+    element = strArray[i];
+    element = element.toLowerCase();
+
+    if(repeatedWords[element])
+      repeatedWords[element] += 1;
+    else 
+      repeatedWords[element] = 1
+  }
+
+  return repeatedWords;
+}
+
+
 
 /*
 8
@@ -114,6 +279,27 @@ Ex: repeatChar("mamababatetacedo")
 */
 
 
+function repeatChar(str) {
+  str = str.toLowerCase();``
+  var charArray = str.split('');
+  var charsObj = {};
+  var element;
+
+  for(var i = 0; i < charArray.length; i++) {
+    element = charArray[i];
+    element = element.toLowerCase();
+
+    if(charsObj[element])
+      charsObj[element] += 1;
+    else 
+      charsObj[element] = 1
+  }
+
+  return charsObj;
+}
+
+
+
 /*
 9
 Create a function called selectFromObject
@@ -123,6 +309,20 @@ and return an object have the key that inside the array
 Ex: selectFromObject({a: 1, cat: 3}, ['a', 'cat', 'd'])
 =>  {a: 1, cat: 3}
 */
+
+function selectFromObject(obj, arr) {
+  var arrElement;
+
+  for(var i = 0; i < arr.length; i++) {
+    arrElement = arr[i];
+    
+    if(!obj[arrElement])
+      delete obj[arrElement];
+  }
+
+  return obj;
+}
+
 
 
 /*
@@ -135,6 +335,19 @@ Ex: objectToArray({firstName:"Moh",age:24})
 => ["firstName","Moh","age",24]
 */
 
+function objectToArray(obj) {
+  var keys = Object.keys(obj);
+  var newArray = [];
+
+  for(var i = 0; i < keys.length; i++) {
+    newArray.push(keys[i]);
+    newArray.push(obj[keys[i]]);
+  }
+
+    return newArray;
+}
+
+
 
 /*
 11
@@ -145,6 +358,18 @@ and return an object of the keys and values in this object
 Ex: arrayToObject(["firstName","Moh","age",24])
 => {firstName:"Moh",age:24}
 */
+
+function arrayToObject(array) {
+  var newObj = {};
+
+  for(var i = 0; i < array.length; i += 2) {
+    newObj[array[i]] = array[i + 1];
+  }
+
+  return newObj;
+}
+
+
 
 
 /*
@@ -159,6 +384,20 @@ Ex: onlyNumber({firstName:"Moh",age:24,movies:[1,5,"string"]})
 */
 
 
+function onlyNumber(obj) {
+  var isElementNaN;
+  
+  for(var key in obj) {
+    isElementNaN = typeof(obj[key]) !== 'number';
+
+    if(isElementNaN)
+      delete obj[key]
+  }
+
+  return obj;
+}
+
+
 /*
 13
 Create a function called onlyString
@@ -169,6 +408,20 @@ and return a new object that have only the values that is a string
 Ex: onlyString({firstName:"Moh",age:24,movies:[1,5,"string"]})
 => {firstName:"Moh"}
 */
+
+
+function onlyString(obj) {
+  var isElementNotString;
+  
+  for(var key in obj) {
+    isElementNotString = typeof(obj[key]) !== 'string';
+
+    if(isElementNotString)
+      delete obj[key]
+  }
+
+  return obj;
+}
 
 
 /*
@@ -182,6 +435,19 @@ Ex: onlyArray({firstName:"Moh",age:24,movies:[1,5,"string"]})
 => {movies:[1,5,"string"]}
 */
 
+function onlyArray(obj) {
+  var isElementNotArray;
+  
+  for(var key in obj) {
+    isElementNotArray = Array.isArray(obj[key]);
+
+    if(isElementNotArray)
+      delete obj[key]
+  }
+
+  return obj;
+}
+
 
 /*
 15
@@ -193,6 +459,10 @@ Ex: keysArray({firstName:"Moh",age:24,movies:[1,5,"string"]})
 => ['firstName', 'age', 'movies']
 
 */
+
+function keysArray(obj) {
+  return Object.keys(obj);
+}
 
 
 /*
@@ -207,6 +477,16 @@ Ex: keysArray({firstName:"Moh",age:24,movies:[1,5,"string"]})
 */
 
 
+function valuesArray(obj) {
+  var valuesArray = [];
+
+  for(var key in obj)
+    valuesArray.push(obj[key]);
+
+  return valuesArray;
+}
+
+
 /*
 17
 make this object => {a:1,b:3,c:4}
@@ -214,6 +494,8 @@ to be this object {a:4,c:66}
 **hint: Search on MDN how to remove a key/value from an object
 */
 
+var object = {a:1,b:3,c:4}
+delete object['b'];
 
 /*
 18
@@ -224,6 +506,11 @@ and return the number of keys inside this object
 Ex: keysArray({a:1,b:2,c:3,d:4})
 => 4
 */
+
+function objectLength(obj) {
+  var numberOfKeys = Object.keys(obj).length;
+  return numberOfKeys;
+}
 
 
 /*
@@ -236,6 +523,16 @@ Ex: evenValue({a:1, b:2, c:3, d:4})
 => {b:2, d:4}
 */
 
+function evenValue(obj) {
+  var newObj = {};
+
+  for(var key in obj)
+    if(obj[key] % 2 === 0)
+      newObj[key] = obj[key];
+
+  return newObj;
+}
+
 
 /*
 20
@@ -243,5 +540,24 @@ Create a function called longestKey
 that accept an object
 and return the value inside the longest key
 
-Ex: evenValue({car:1, school:2, monster:3, alexMercer:4})=> 4
+Ex: longestKey({car:1, school:2, monster:3, alexMercer:4})=> 4
 */
+
+
+function longestKey(obj) {
+  var keys = Object.keys(obj);
+  
+  var key = keys[0];
+  var maxKeyLenth = keys[0].length;
+  var valueMaxKey = obj[0];
+
+  for(var i = 1; i < keys.length; i++) {
+    if(maxKeyLenth < keys[i].length) {
+      key = keys[i];
+      maxKeyLenth = keys[i].length;
+      valueMaxKey = obj[key];
+    }
+  }
+
+  return valueMaxKey;
+}
