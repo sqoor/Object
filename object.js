@@ -48,21 +48,10 @@ Ex: firstName(persons) => ['John', 'Alex', 'Alice', 'Thor', 'Soso']
 function firstName (arr) {
   var firstNamesArray = [];
   var personObj;
-  var nameObj;
 
   for(var i = 0; i < arr.length; i++) {
     personObj = arr[i];
-
-    for(var outerKey in personObj) {
-      if(outerKey === 'name') {
-        nameObj = personObj[outerKey];
-        for(var innerKey in nameObj) {
-          if(innerKey === 'first') {
-            firstNamesArray.push(nameObj[innerKey]);
-          }
-        }
-      }
-    }
+    firstNamesArray.push(personObj.name.first);
   }
 
   return firstNamesArray;
@@ -87,12 +76,7 @@ function  averageAge(arr) {
 
   for(var i = 0; i < arr.length; i++) {
     personObj = arr[i];
-
-    for(var key in personObj) {
-      if(key === 'age') {
-        sum += personObj[key];
-      }
-    }
+    sum += personObj.age;
   }
 
   averageAges = sum / arr.length
@@ -115,20 +99,16 @@ Ex: olderPerson(persons) => "Soso Al-Amora"
 
 function olderPerson(arr) {
   var personObj;
-  var maxAge = 0;
   var OlderPersonName;
+  var maxAge = 0;
 
   for(var i = 0; i < arr.length; i++) {
     personObj = arr[i];
 
-    for(var key in personObj) {
-      if(key === 'age') {
-        if(maxAge < personObj[key]) {
-           maxAge =  personObj[key];
-           OlderPersonName = personObj['name']['first'] + ' ' + personObj['name']['last'];
-        }
-      }
-    }
+    if(maxAge < personObj.age) {
+      maxAge =  personObj.age;
+      OlderPersonName = personObj.name.first + ' ' + personObj.name.last;
+   }
   }
 
   return OlderPersonName;
@@ -152,29 +132,19 @@ Ex: longestName(persons) => "Soso Al-Amora"
 
 function longestName(arr) {
   var personObj;
-  var nameObj;
-  var longestFullName = '';
   var tempName;
+  var longestFullName = '';
 
   for(var i = 0; i < arr.length; i++) {
     personObj = arr[i];
-
-    for(var outerKey in personObj) {
-      if(outerKey === 'name') {
-        nameObj = personObj[outerKey];
-        for(var innerKey in nameObj) {
-          tempName = nameObj['first'] + ' ' + nameObj['last'];
+    tempName = personObj.name.first + ' ' + personObj.name.last;
           
-          if(longestFullName.length < tempName.length)
-            longestFullName = tempName;
-        }
-      }
-    }
+    if(longestFullName.length < tempName.length)
+      longestFullName = tempName;
   }
 
   return longestFullName;
 }
-
 
 
 
@@ -191,26 +161,17 @@ Ex: longestName(persons) => "Soso Al-Amora"
 */
 
 
-function longestName(arr) {
+function longestName2(arr) {
   var personObj;
-  var nameObj;
-  var longestFullName = '';
   var tempName;
+  var longestFullName = '';
 
   for(var i = 0; i < arr.length; i++) {
     personObj = arr[i];
-
-    for(var outerKey in personObj) {
-      if(outerKey === 'name') {
-        nameObj = personObj[outerKey];
-        for(var innerKey in nameObj) {
-          tempName = nameObj['first'] + ' ' + nameObj['last'];
+    tempName = personObj.name.first + ' ' + personObj.name.last;
           
-          if(longestFullName.length < tempName.length)
-            longestFullName = tempName;
-        }
-      }
-    }
+    if(longestFullName.length < tempName.length)
+      longestFullName = tempName;
   }
 
   return longestFullName;
@@ -247,13 +208,13 @@ Ex: repeatWord("My name is alex mercer class name B baba mama hello Hello HELLO"
 
 
 function repeatWord(str) {
+  str = str.toLowerCase();
   var strArray = str.split(' ');
   var repeatedWords = {};
   var element;
 
   for(var i = 0; i < strArray.length; i++) {
     element = strArray[i];
-    element = element.toLowerCase();
 
     if(repeatedWords[element])
       repeatedWords[element] += 1;
